@@ -19,92 +19,177 @@
 
 
 var game = {
-    artist: ["michaeljackson", "prince", "madonna","u2", "rundmc", "vanhalen", "publicenemy", "billyjoel", "thepolice"],
+    artist: ["michaeljackson", "prince", "madonna", "rundmc", "vanhalen", "publicenemy", "billyjoel", "thepolice"],
     guessedLetters: [],
     correctGuess: [],
     incorrectGuess: [],
     initialCharacters: [],
     currentGuess: [],
-    maxGuess: 0,
-    acceptableChoice: "abcdefghijklmnopqrstu"
-    
+    maxGuess: 10,
+    accurate: false,
+    wins: 0,
+    loss: 0
 
+
+};
+
+
+
+
+function reLoad() {
+    game.initialCharacters = [];
+    game.maxGuess = 10;
+    game.incorrectGuess = [];
+    randomSelection = game.artist[Math.floor(Math.random() * game.artist.length)];
+    console.log("test:" + randomSelection)
+
+    for (var i = 0; i < randomSelection.length; i++) {
+        game.initialCharacters.push(" _ ");
+        // game.currentGuess.push(randomSelection[i]);
+    };
+    // document.querySelector(".maxguess").innerHTML = game.maxGuess;
+    // document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
+    // document.querySelector('.incorrect').innerHTML = game.incorrectGuess;
+
+
+};
+function reset() {
+    game.wins = 0;
+    game.loss = 0;
+};
+
+function updateAll() {
+    document.querySelector(".winamount").innerHTML = game.wins;
+    document.querySelector(".lossamount").innerHTML = game.loss;
+    document.querySelector(".maxguess").innerHTML = game.maxGuess;
+    document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
+    document.querySelector('.incorrect').innerHTML = game.incorrectGuess;
 }
+
+
+
 // Randomly select an artist from the list of artist 
-var randomSelection = game.artist[Math.floor(Math.random() * game.artist.length)]
+// var randomSelection = game.artist[Math.floor(Math.random() * game.artist.length)]
 
 // Loop through the radomly selected artist 
- for (var i = 0; i < randomSelection.length; i++) {
-    //  Set the initial characters based on the randomly selected artist
-    game.initialCharacters.push(" _ ");
+// for (var i = 0; i < randomSelection.length; i++) {
+//  Set the initial characters based on the randomly selected artist
+// game.initialCharacters.push(" _ ");
 
-    // store each character of the randomly selected artist in the currentGuess array
-    game.currentGuess.push(randomSelection[i]);
-    
-}
-console.log(game.artist)
-console.log("Random Selection is: " + randomSelection)
-console.log(randomSelection.length)
-console.log(game.currentGuess)
+// store each character of the randomly selected artist in the currentGuess array
+// game.currentGuess.push(randomSelection[i]);
+
+// }
+
 
 // function to write the maximum guesses to the html page 
-function Update () {
-    document.querySelector(".maxguess").innerHTML = maxGuess;
+function Update() {
+    document.querySelector(".maxguess").innerHTML = game.maxGuess;
     document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
 };
 
-// WHen the window loads perform the following function 
-window.onload = function load (){
-    // write the initial characters to the html page for the random selection 
-    // document.querySelector('.guess').innerHTML = game.initialCharacters;
 
-// Flexible guess to allow the number of guesses to change based on the random selection 
-    maxGuess = Math.round(randomSelection.length * 1.65);
-
-// write the maximum guesses to the html page 
-    Update();
-};
 
 
 // Detect user selection 
-document.onkeyup = function(){
+document.onkeyup = function () {
     choice = event.key.toLowerCase();
-
+    console.log("you choice: " + randomSelection)
     // restrict to only letters 
-    if (event.keyCode >= 65 && event.keyCode <=90) {
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
         // for each attempt check against the current guess array
-        
+        accurate = false;
         for (var a = 0; a < randomSelection.length; a++) {
-            if (randomSelection[a] === choice){
-                // console.log("right" + game.currentGuess[a]);
-                // console.log("initial charact beg: " + game.initialCharacters);
-                game.initialCharacters.splice(a,1, randomSelection[a]);
-                // console.log("initial charact aft: " + game.initialCharacters);
+            if (randomSelection[a] === choice) {
+                accurate = true;
+                game.initialCharacters.splice(a, 1, randomSelection[a]);
+                console.log("INITIAL CHARAC: " + game.initialCharacters.join(""))
+                if (game.initialCharacters.join("") == randomSelection) {
+                    console.log("winner");
+                    game.wins++;
+                    reLoad();
+                    updateAll();
+                }
+            }
 
-                maxGuess--;
+        }
+        if (accurate === false) {
+            // check to see if the input has been incorrectly guessed already 
+            if (game.incorrectGuess.includes(choice)) {
 
-                Update();
             }
             else {
+                //  decrease guess by 1
+                game.maxGuess--;
                 game.incorrectGuess.push(choice);
-                //  game.incorrectGuess.splice(a,1,game.incorrectGuess[a]);
-                console.log("inc guess: " + game.incorrectGuess)
-                // doing a hack way but there has to be a better way
+                document.querySelector('.incorrect').innerHTML = game.incorrectGuess
             }
-   
         }
-        
+
+        if (game.maxGuess === 0) {
+            game.loss++;
+
+            // var playAgain = confirm("Another Round?")
+
+            // alert("game over");
+            reLoad();
+            updateAll();
+            console.log("gameover")
+        }
+
+        if (accurate === true) {
+
+            console.log("your choice is accurate ")
+        };
+        updateAll();
+
+
+
+        // console.log("right" + game.currentGuess[a]);
+        // console.log("initial charact beg: " + game.initialCharacters);
+        // 
+        // console.log("initial charact aft: " + game.initialCharacters);
+
+        // maxGuess--;
+
+        // 
+
+        // 
+        //  game.incorrectGuess.splice(a,1,game.incorrectGuess[a]);
+        // console.log("inc guess: " + game.incorrectGuess)
+        // doing a hack way but there has to be a better way  
+
+
     }
     else {
         alert("Select a letter")
     }
-   
 
-    console.log(choice)
-    console.log(event.keyCode)
 
+
+};
+
+
+
+
+
+
+// WHen the window loads perform the following function 
+// window.onload = function load() {
+
+//     Update();
+// };
+
+window.onload = function () {
+    reLoad();
+    updateAll();
+    
 }
 
+  // write the initial characters to the html page for the random selection 
+    // document.querySelector('.guess').innerHTML = game.initialCharacters;
 
+    // Flexible guess to allow the number of guesses to change based on the random selection 
+    // maxGuess = Math.round(randomSelection.length * 1.65);
 
-
+    // write the maximum guesses to the html page 

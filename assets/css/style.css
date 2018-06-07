@@ -1,0 +1,34 @@
+/* .row {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+} */
+
+.scores {
+    margin-bottom: 40px;
+}
+
+.amount {
+    border-style: dotted;
+    padding: 10px;
+    border-radius: 50%;
+    
+}
+
+.jumbotron {
+    background-image: url(../images/N8M_banner_temp.jpg);
+    background-size: cover;
+    height: 20%;
+    opacity: 0.6;
+    /* background-repeat: no-repeat; */
+    
+}
+
+.mainheader,.lead {
+    color: aliceblue
+}
+
+.out {
+    /* background-image: url(../images/80sbg.jpg);
+    opacity: 0.3; */
+
+}

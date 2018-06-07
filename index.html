@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <script type="text/javascript" src="assets/javascript/game.js"> </script>
     <title>WORD GUESS GAME </title>
 </head>
@@ -17,44 +19,87 @@
 
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">WORD GUESS GAME </h1>
-            <p class="lead"> INSTRUCTIONS GO HERE
+            <h1 class="display-4 mainheader">WORD GUESS GAME </h1>
+            <p class="lead"> Press any letter to start
             </p>
         </div>
     </div>
-    <div class="container">
-        <div class="row" style="text-align: center">
-
-        <div class="col-lg-6" style="border-style: dotted" >
+    <div class="out">
 
 
-            <h1>Lets Play Hangman</h1>
+        <div class="container">
+            <div class="row" style="text-align: center">
 
-            <h3>
-                Max Gueses: <span class="maxguess"> </span>
-            </h3>
+                <div class="col-lg-6" style="border-style: dotted">
 
-            <img src="assets/images/hangman_0.gif" alt="" class="image">
 
+                    <h1>Lets Play Hangman</h1>
+
+                    <h3>
+                        Max Gueses:
+                        <span class="maxguess"> </span>
+                    </h3>
+
+                    <p>
+                        Wins: Losses:
+                    </p>
+
+                    <img src="assets/images/hangman_0.gif" alt="" class="image">
+
+                </div>
+
+                <div class="col-lg-6" style="border-style: dotted">
+
+                    <h1>Try and Guess</h1>
+
+                    <p> Your Guesses
+                        <br>
+                        <span class="guess" style="letter-spacing: 5px"> </span>
+                    </p>
+
+                    <p>
+                        Incorrect
+                        <br>
+                        <span class="incorrect"> </span>
+                    </p>
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <strong> SCORE </strong>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6 scores">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">WINS</h5>
+                                            <p class="card-text">
+                                                <span class="winamount amount"> </span>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">LOSS</h5>
+                                            <p class="card-text">
+                                                <span class="lossamount amount"> </span>
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="#" class="btn btn-primary" id="button">RESTART GAME</a>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
         </div>
-
-        <div class="col-lg-6" style="border-style: dotted">
-
-            <h1>Try and Guess</h1>
-
-            <p> Your Guesses
-                <br>
-                <span class="guess" style="letter-spacing: 5px"> </span>
-            </p>
-
-            <p>
-                Incorrect 
-            </p>
-
-        </div>
-
-
-        </div>
-
-
-    </div>
