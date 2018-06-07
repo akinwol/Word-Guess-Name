@@ -20,6 +20,7 @@
 
 var game = {
     artist: ["michaeljackson", "prince", "madonna", "rundmc", "vanhalen", "publicenemy", "billyjoel", "thepolice"],
+    errorimages: ['assets/images/error-0','assets/images/error-1' ],
     guessedLetters: [],
     correctGuess: [],
     incorrectGuess: [],
@@ -36,10 +37,13 @@ var game = {
 
 
 
+
+
 function reLoad() {
     game.initialCharacters = [];
     game.maxGuess = 10;
     game.incorrectGuess = [];
+    game.errorimages = [0];
     randomSelection = game.artist[Math.floor(Math.random() * game.artist.length)];
     console.log("test:" + randomSelection)
 
@@ -64,6 +68,7 @@ function updateAll() {
     document.querySelector(".maxguess").innerHTML = game.maxGuess;
     document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
     document.querySelector('.incorrect').innerHTML = game.incorrectGuess;
+    document.querySelector('.image').appendChild(img) = game.errorimages;
 }
 
 
@@ -183,8 +188,19 @@ document.onkeyup = function () {
 window.onload = function () {
     reLoad();
     updateAll();
+
+    // 
     
+    var restart = document.getElementById('button');
+    restart.addEventListener("click", function (){
+        reset();
+        reLoad();
+        updateAll();
+        console.log("something")
+    });
+    console.log("restart button: " + restart)
 }
+
 
   // write the initial characters to the html page for the random selection 
     // document.querySelector('.guess').innerHTML = game.initialCharacters;

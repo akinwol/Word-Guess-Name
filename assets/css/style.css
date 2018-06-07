@@ -4,13 +4,14 @@
 } */
 
 .scores {
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .amount {
     border-style: dotted;
     padding: 10px;
     border-radius: 50%;
+    border-color: #906078;
     
 }
 
@@ -31,4 +32,27 @@
     /* background-image: url(../images/80sbg.jpg);
     opacity: 0.3; */
 
+}
+
+.cont {
+    border-style: dotted;
+    border-color: #484860;
+   /* margin: 2px; */
+   
+}
+
+.card {
+    border-color: #906078;
+    margin-bottom: 30px;
+}
+
+.card-header {
+    border-color: #906078;
+    background-color: #906078;
+    color: aliceblue;
+}
+
+#button {
+    border-color: #906078;
+    background-color: #906078;
 }
