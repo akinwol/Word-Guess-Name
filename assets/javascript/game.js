@@ -21,19 +21,16 @@
 var game = {
     artist: ["michaeljackson", "prince", "madonna", "rundmc", "vanhalen", "publicenemy", "billyjoel", "thepolice"],
     errorimages: ['assets/images/error-0','assets/images/error-1' ],
-    guessedLetters: [],
-    correctGuess: [],
+    lossCount: 0,
     incorrectGuess: [],
     initialCharacters: [],
-    currentGuess: [],
     maxGuess: 10,
     accurate: false,
     wins: 0,
-    loss: 0
+    loss: 0,
 
 
 };
-
 
 
 
@@ -44,6 +41,7 @@ function reLoad() {
     game.maxGuess = 10;
     game.incorrectGuess = [];
     game.errorimages = [0];
+    game.lossCount = 0;
     randomSelection = game.artist[Math.floor(Math.random() * game.artist.length)];
     console.log("test:" + randomSelection)
 
@@ -51,16 +49,19 @@ function reLoad() {
         game.initialCharacters.push(" _ ");
         // game.currentGuess.push(randomSelection[i]);
     };
-    // document.querySelector(".maxguess").innerHTML = game.maxGuess;
-    // document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
-    // document.querySelector('.incorrect').innerHTML = game.incorrectGuess;
+   
 
 
 };
+// function to start over
 function reset() {
     game.wins = 0;
     game.loss = 0;
 };
+
+
+
+// function to update all my html elements 
 
 function updateAll() {
     document.querySelector(".winamount").innerHTML = game.wins;
@@ -68,7 +69,7 @@ function updateAll() {
     document.querySelector(".maxguess").innerHTML = game.maxGuess;
     document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
     document.querySelector('.incorrect').innerHTML = game.incorrectGuess;
-    document.querySelector('.image').appendChild(img) = game.errorimages;
+    // document.querySelector('.image').appendChild(img) = game.errorimages;
 }
 
 
@@ -88,11 +89,6 @@ function updateAll() {
 
 
 // function to write the maximum guesses to the html page 
-function Update() {
-    document.querySelector(".maxguess").innerHTML = game.maxGuess;
-    document.querySelector('.guess').innerHTML = game.initialCharacters.join(" ");
-};
-
 
 
 
@@ -101,16 +97,26 @@ document.onkeyup = function () {
     choice = event.key.toLowerCase();
     console.log("you choice: " + randomSelection)
     // restrict to only letters 
+   
     if (event.keyCode >= 65 && event.keyCode <= 90) {
-        // for each attempt check against the current guess array
+       
+    //    var errorimages = ["assets/images/error-0", "assets/images/error-1"];
+
+    //     console.log("first time image:" + errorimages[1])
+    //     console.log(lossCount)
+        // reset accurate variable false
         accurate = false;
+        
+        // for each attempt check the entered key against the current guess array
         for (var a = 0; a < randomSelection.length; a++) {
             if (randomSelection[a] === choice) {
+                // if theres a match set accurate to true 
                 accurate = true;
+                // if match raplace the initial characters with the the entered key
                 game.initialCharacters.splice(a, 1, randomSelection[a]);
                 console.log("INITIAL CHARAC: " + game.initialCharacters.join(""))
                 if (game.initialCharacters.join("") == randomSelection) {
-                    console.log("winner");
+                    // console.log("winner");
                     game.wins++;
                     reLoad();
                     updateAll();
@@ -126,6 +132,7 @@ document.onkeyup = function () {
             else {
                 //  decrease guess by 1
                 game.maxGuess--;
+                // console.log("image: " + game.errorimages[1]); 
                 game.incorrectGuess.push(choice);
                 document.querySelector('.incorrect').innerHTML = game.incorrectGuess
             }
